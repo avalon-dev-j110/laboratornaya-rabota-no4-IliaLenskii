@@ -1,38 +1,41 @@
 package ru.avalon.java.dev.j10.labs;
 
+import ru.avalon.java.dev.j10.labs.common.Personcl;
+import ru.avalon.java.dev.j10.labs.common.Sortcl;
+import ru.avalon.java.dev.j10.labs.common.PersonComparator;
+import java.util.Date;
 import java.util.Comparator;
 
 public class Application {
 
     public static void main(String[] args) {
-        /*
-         * TODO(Студент): Проинициализируйте массив strings
-         *
-         * Массив слелдует проинициализировать таким образом,
-         * чтобы он содержал 20 строк, расположенных не
-         * по порядку.
-         */
-	    String[] strings = null;
 
-	    /*
-	     * TODO(Студент): Проинициализируйте массив persons
-	     *
-	     * 1. Создайте класс, реализующий интерфейс Person.
-	     *
-	     * 2. Проинициализируйте массив persons 20
-	     *    экземплярыми созданного класса.
-	     */
-	    Person[] persons = null;
+	    String[] strings = {
+			"Орест", "Пелагея", "Сергей", "Остап",
+			"Паула", "Осип", "Перри", "Иосиф",
+			"Иосиф", "Сидор", "Аркадий", "Соломон",
+			"Фёкла", "Ария", "Аркадий", "Арсен",
+			"Сергей", "Феликс", "Фелисити","Пётр"
+		};
 
-        /*
-         * TODO(Студент): Проинициализируйте переменную sort
-         *
-         * 1. Создайте класс, реализующий интерфейс Sort
-         *
-         * 2. Проинициализируйте переменную sort экземпляром
-         *    созданного класса.
-         */
-        Sort sort = null;
+		Personcl[] persons = new Personcl[strings.length];
+
+	    for(int i = 0; i < strings.length; ++i) {
+	    	String s = strings[i];
+	    	Date d = null;
+
+	    	if(s == null || s == "")
+	    		continue;
+
+	    	if(i > 0 && (i % 4) == 0) {
+	    		d = new Date();
+				d.setYear( d.getYear() - i ); // Deprecated
+			}
+
+			persons[i] = new Personcl(s, d);
+		}
+
+        Sort sort = new Sortcl();
 
         /*
          * TODO(Студент): Проинициализируйте переменную comparator
@@ -44,7 +47,8 @@ public class Application {
          * 2. Проинициализируйте переменную comparator
          *    экземпляром созданного класса.
          */
-        Comparator comparator = null;
+
+		Comparator<String> comparator = new PersonComparator();
 
         /*
          * TODO(Студент): Отсортируйте массив persons по возрастанию
@@ -58,6 +62,9 @@ public class Application {
          */
         sort.sort(persons);
 
+		//for (Person p : persons)
+		//	System.out.println(p.getName() +" - "+ p.getBirthDate());
+
         /*
          * TODO(Студент): Отсортируйте массив strings по возрастанию
          *
@@ -70,6 +77,9 @@ public class Application {
          */
         sort.sort(strings);
 
+        //for(int i = 0; i < strings.length; ++i)
+		//	System.out.println(strings[i]);
+
         /*
          * TODO(Студент): Отсортируйте массив strings по убыванию
          *
@@ -80,5 +90,8 @@ public class Application {
          *    что массив отсортирован по убыванию.
          */
         sort.sort(strings, comparator);
+
+		//for(int i = 0; i < strings.length; ++i)
+		//	System.out.println(strings[i]);
     }
 }
